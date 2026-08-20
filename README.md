@@ -255,8 +255,8 @@ milk-man-backend/
 │   ├── main.py
 │   │
 │   ├── database/
-│   │   ├── database.py
-│   │   └── models.py
+│   │   └── database.py
+│   │   
 │   │
 │   ├── models/
 │   │   ├── user.py
