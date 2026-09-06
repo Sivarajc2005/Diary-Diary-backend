@@ -23,7 +23,7 @@ def init_db():
     if not database_exists(engine.url):
         create_database(engine.url)
 
-    import app.models 
+    import app.schemas 
     Base.metadata.create_all(bind=engine)
 
 
