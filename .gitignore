@@ -1,3 +1,7 @@
 #ignore the venv
 venv*
 .env
+
+#remove app compiled python byte code 
+__pycache__/
+*.pyc
