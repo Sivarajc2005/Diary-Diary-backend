@@ -3,22 +3,29 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy_utils import create_database, database_exists
-import app.models
 
 load_dotenv()
 
-user_name = os.getenv("DB_USER")
-password = os.getenv("DB_PASSWORD")
-port = os.getenv("DB_PORT")
-database = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+DB_NAME = os.getenv("DB_NAME")
 
-engine = create_engine(f"postgresql://{user_name}:{password}@localhost:{port}/{database}")
+DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
+engine = create_engine(DATABASE_URL, echo=True)
 session_maker = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-if not database_exists(engine.url):
-    create_database(engine.url)
+
+def init_db():
+    if not database_exists(engine.url):
+        create_database(engine.url)
+
+    import app.models 
     Base.metadata.create_all(bind=engine)
+
 
 def get_db():
     db = session_maker()
@@ -26,9 +33,3 @@ def get_db():
         yield db
     finally:
         db.close()
-
-
-
-
-
-
