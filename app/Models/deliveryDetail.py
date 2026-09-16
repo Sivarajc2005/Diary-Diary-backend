@@ -28,7 +28,6 @@ class DeliveryDetailUpdate(BaseModel):
 
 class DeliveryDetailResponse(DeliveryDetailBase):
     id: int
-
     model_config = ConfigDict(from_attributes=True)
 
 

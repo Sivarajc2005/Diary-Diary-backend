@@ -2,6 +2,7 @@
 venv*
 .env
 
-#remove app compiled python byte code 
+# Python cache / compiled files
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
